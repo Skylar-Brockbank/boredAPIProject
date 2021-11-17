@@ -17,4 +17,17 @@ export default class ActivitySystem{
       request.send();
     });
   }
+  static getRandomActivity() {
+    return fetch(`http://www.boredapi.com/api/activity?`)
+      .then(function(response) {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response.json();
+      })
+      .catch(function(error) {
+        return error;
+      });
+  }
+
 }

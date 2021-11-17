@@ -14,8 +14,24 @@ function dollarify(number){
     return dollars;
   }
 }
+function getElements(response) {
+  if (response.activity) {
+    $('#activity').text("Activity: " + response.activity);
+    $('#price').text("Price: " + dollarify(response.price));
+  } else {
+    $('.showErrors').text(`There was an error: ${response.message}`);
+  }
+}
 
 $(document).ready(function() {
+  $("#rando").click(function(){
+    $('#activity').text('');
+    $('#price').text('');
+    $('.showErrors').text('');
+    ActivitySystem.getRandomActivity().then(function(response) {
+      getElements(response);
+    });
+  });
   $('#b').click(function() {
     $('#activity').text('');
     $('#price').text('');
